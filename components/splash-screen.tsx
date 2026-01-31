@@ -24,6 +24,11 @@ export function SplashScreen() {
         {/* Logo Container with Animation */}
         <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4">
           <div className="absolute inset-0 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
+          <img
+           src="/VidhyaKendra-logo.png"
+            alt="Vidhya Kendra Logo"
+            className="relative w-full h-full object-contain drop-shadow-2xl"
+          />
         </div>
 
         {/* Text Content */}
