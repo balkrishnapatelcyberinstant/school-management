@@ -1,0 +1,688 @@
+# STUDENT MODULE - COMPLETE SCHOOL MANAGEMENT SYSTEM
+## Comprehensive Development Prompt
+
+---
+
+## PROJECT OVERVIEW
+Build a complete student-facing module for the School Management System with all features adapted from the teacher module. The student interface should be intuitive, mobile-friendly, and provide students with easy access to their academic information, homework, attendance, notices, and grades.
+
+---
+
+## DESIGN SYSTEM
+
+### Color Palette
+- **Primary Blue**: #1897C6 (Main actions, links, primary buttons)
+- **Accent Orange**: #D88931 (Highlights, warnings, pending items)
+- **Dark Orange**: #D87331 (Secondary actions)
+- **Teal/Cyan**: #67BAC3 (Success states, completed items)
+- **Neutral Gray**: #535359 (Text primary)
+- **Light Gray**: #6B7280 (Text secondary)
+- **Background**: #F9FAFB (Page background)
+- **Card Background**: #FFFFFF
+- **Border**: #E5E7EB
+
+### Typography
+- **Font Family**: Use Geist Sans for body text and Geist Mono for code/numbers
+- **Headings**: Bold, 2xl to 3xl font size
+- **Body Text**: Regular, base to sm font size with leading-relaxed
+- **Labels**: Semibold, sm font size
+
+### Layout Principles
+- **Mobile-First**: Responsive design starting from mobile
+- **Card-Based**: Use elevated cards with rounded corners (rounded-xl, rounded-2xl)
+- **Gradient Accents**: Subtle gradients for headers and important sections
+- **Border Highlights**: Left or top borders (border-l-4) for visual hierarchy
+- **Spacing**: Consistent gap-4, gap-6, p-6, mb-8 spacing
+
+---
+
+## CORE FEATURES & PAGES
+
+### 1. STUDENT DASHBOARD (Home Page)
+**Route**: `/app/page.tsx` or `/app/dashboard/page.tsx`
+
+**Layout Structure**:
+- **Header Section**: Welcome message with student name, profile picture, class, and roll number
+- **Quick Stats Cards** (4 cards in grid):
+  - Pending Homework (count with orange accent)
+  - Attendance Percentage (with green/red indicator)
+  - Upcoming Classes (today's schedule count)
+  - Unread Notices (count with red badge)
+
+**Today's Schedule Section**:
+- List of classes for the current day
+- Display: Subject name, Time, Teacher name, Room number
+- Visual indicators for current/upcoming/completed classes
+- Color coding: Current class (blue highlight), Upcoming (gray), Completed (green checkmark)
+
+**Recent Activity Section**:
+- Last 5 homework assignments (title, subject, due date, status)
+- Recent notices (truncated with "Read more")
+- Recent grade updates
+
+**Quick Actions**:
+- View All Homework
+- Check Attendance
+- View Notices
+- View Grades
+
+---
+
+### 2. HOMEWORK PAGE
+**Route**: `/app/homework/page.tsx`
+
+**View Sections**:
+
+**Active Homework Tab**:
+- Display all pending homework assignments
+- Each card shows:
+  - Subject and Class
+  - Assignment Title
+  - Description/Instructions
+  - Due Date with countdown (X days remaining)
+  - Attachments from teacher (images, videos, PDFs) with download/view
+  - Submission Status: Not Submitted / Submitted / Late Submission
+  - Grade (if graded): Display grade with color coding
+
+**Homework Card Actions**:
+- **Submit Work Button**: Opens submission modal
+- **View Details**: Expand to see full instructions
+- **Download Attachments**: Download teacher's reference materials
+
+**Submission Modal**:
+- Upload files (images, videos, PDFs, documents)
+- Text area for written answers/notes
+- Multiple file upload support with preview
+- Remove uploaded files before submit
+- Submit button with confirmation
+- Show submission timestamp after submit
+
+**Submitted Homework Tab**:
+- List of all submitted homework
+- Show: Subject, Title, Submitted Date, Grade, Teacher Feedback
+- Option to view submitted work
+- Download teacher's feedback/comments if any
+
+**Graded Homework Tab**:
+- Filter by subject
+- Show grade statistics (average, highest, lowest)
+- Visual charts showing grade trends
+
+---
+
+### 3. ATTENDANCE PAGE
+**Route**: `/app/attendance/page.tsx`
+
+**Overview Section**:
+- **Overall Attendance Card**:
+  - Large percentage display (e.g., 92%)
+  - Total Present / Total Classes
+  - Visual progress bar
+  - Color coded: Green (>75%), Orange (65-75%), Red (<65%)
+
+**Monthly Calendar View**:
+- Calendar showing current month
+- Days marked as:
+  - Present (green dot/checkmark)
+  - Absent (red cross)
+  - Holiday (yellow star)
+  - Leave (blue indicator)
+- Click on date to see class-wise attendance
+
+**Subject-Wise Attendance**:
+- Table/Card list showing each subject
+- Columns: Subject, Present, Absent, Total, Percentage
+- Visual progress bars for each subject
+- Sort by attendance percentage
+
+**Attendance History**:
+- Filterable by month, subject
+- List view with date, day, status for each class
+- Export attendance report (PDF)
+
+**Warning Section**:
+- If attendance < 75%, show warning card
+- Display: "Your attendance is below required 75%. You need X more days to reach minimum attendance."
+
+---
+
+### 4. CLASSES/SCHEDULE PAGE
+**Route**: `/app/classes/page.tsx`
+
+**Weekly Timetable View**:
+- Grid layout showing all classes for the week
+- Days (Monday-Saturday) vs Time slots
+- Each cell shows:
+  - Subject name
+  - Teacher name
+  - Room number
+- Current class highlighted
+- Color coding by subject
+
+**Daily View** (Alternative/Additional):
+- List of classes for selected day
+- Time, Subject, Teacher, Room
+- Countdown to next class
+- Tap to see class details
+
+**Class Details Modal**:
+- Subject information
+- Teacher contact (if allowed)
+- Syllabus/topics covered
+- Upcoming tests/assignments for that subject
+- Class notes/materials
+
+**Subject Filter**:
+- View schedule by specific subject
+- See all occurrences of that subject in week
+
+---
+
+### 5. NOTICES PAGE
+**Route**: `/app/notices/page.tsx`
+
+**Notice Feed**:
+- Chronological list of notices (newest first)
+- Filter by:
+  - All Notices
+  - Class-specific notices
+  - School-wide notices
+  - Urgent (marked with red badge)
+
+**Notice Card Display**:
+- Title (bold, large)
+- Posted date and time
+- Scheduled publish time
+- Active duration (expires in X days)
+- Notice content
+- Optional image display (if attached by teacher)
+- Read/Unread indicator
+- Category badge (Class/School-wide)
+
+**Notice Details View**:
+- Full notice with all information
+- Mark as read
+- Share notice (copy link)
+- Print notice option
+
+**Search & Filter**:
+- Search by title or content
+- Filter by date range
+- Filter by importance
+
+---
+
+### 6. GRADES/RESULTS PAGE
+**Route**: `/app/grades/page.tsx`
+
+**Report Card View**:
+- Select exam/term from dropdown
+- Display all subjects with marks
+- Table showing:
+  - Subject
+  - Total Marks
+  - Marks Obtained
+  - Grade
+  - Remarks
+- Overall percentage
+- Overall grade/rank
+
+**Subject-Wise Performance**:
+- Cards for each subject
+- Show grade trends (graph/chart)
+- Comparison with class average (if enabled)
+- Best and weakest subjects highlighted
+
+**Progress Tracking**:
+- Charts showing performance over multiple exams
+- Line graphs for each subject
+- Overall GPA/percentage trend
+
+**Test Schedule** (Upcoming):
+- List of upcoming tests/exams
+- Subject, Date, Time, Syllabus
+- Countdown to exam
+
+**Achievement Section**:
+- Awards, certificates, special achievements
+- Participation in events
+- Extra-curricular performance
+
+---
+
+### 7. PROFILE PAGE
+**Route**: `/app/profile/page.tsx`
+
+**Student Information Section**:
+- Profile photo upload/change
+- Name, Roll Number, Class, Section
+- Date of Birth, Blood Group
+- Contact Number, Email
+- Parent's Contact Information
+- Address
+
+**Academic Information**:
+- Admission Number
+- Academic Year
+- Previous class/grades
+- Fee payment status (if applicable)
+
+**Settings Section**:
+- Change password
+- Notification preferences
+- Language selection
+- Theme (light/dark mode)
+- Privacy settings
+
+**Parent Portal Access**:
+- Parent login credentials
+- QR code for parent app
+
+---
+
+### 8. LIBRARY PAGE (Optional)
+**Route**: `/app/library/page.tsx`
+
+**Issued Books**:
+- List of currently borrowed books
+- Book name, Author, Issue Date, Due Date
+- Return status
+- Fine (if overdue)
+
+**Available Books**:
+- Search and browse library catalog
+- Filter by subject, author, genre
+- Request book reservation
+
+**Reading History**:
+- Previously read books
+- Reading statistics
+
+---
+
+### 9. FEE PAYMENT PAGE (Optional)
+**Route**: `/app/fees/page.tsx`
+
+**Fee Dashboard**:
+- Total fee amount
+- Paid amount
+- Pending amount
+- Due date
+
+**Payment History**:
+- List of all transactions
+- Receipt download
+- Payment mode
+
+**Make Payment**:
+- Online payment integration
+- Payment confirmation
+
+---
+
+### 10. NOTIFICATIONS CENTER
+**Route**: `/app/notifications/page.tsx`
+
+**Notification Types**:
+- Homework assigned
+- Homework graded
+- Notice posted
+- Attendance marked
+- Grade published
+- Fee reminder
+- Upcoming exam alert
+
+**Notification Card**:
+- Icon based on type
+- Title and description
+- Timestamp
+- Read/Unread status
+- Action button (View Homework, View Notice, etc.)
+
+**Filter Options**:
+- All notifications
+- Unread only
+- By type (homework, notices, grades, etc.)
+- By date
+
+---
+
+## TECHNICAL SPECIFICATIONS
+
+### Technology Stack
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui components
+- **Icons**: lucide-react
+- **State Management**: React hooks (useState, useEffect)
+- **Data Fetching**: SWR for client-side data (if needed)
+
+### Database Integration
+**Required**: Use Supabase or Neon PostgreSQL for backend
+
+**Database Tables** (Student Module):
+1. **students** - Student information
+2. **homework_submissions** - Student homework submissions
+3. **attendance_records** - Daily attendance data
+4. **grades** - Exam/test grades
+5. **notices_read** - Track which notices student has read
+6. **class_schedule** - Timetable data
+7. **notifications** - Student notifications
+
+**Authentication**:
+- Student login (email/roll number + password)
+- Secure session management
+- Parent access (separate login for parents to view student data)
+
+### File Structure
+```
+/app
+  /page.tsx (Dashboard)
+  /homework
+    /page.tsx (Homework list & submission)
+  /attendance
+    /page.tsx (Attendance tracking)
+  /classes
+    /page.tsx (Class schedule)
+  /notices
+    /page.tsx (Notice board)
+  /grades
+    /page.tsx (Grades & results)
+  /profile
+    /page.tsx (Student profile)
+  /notifications
+    /page.tsx (Notifications center)
+  /library (optional)
+    /page.tsx
+  /fees (optional)
+    /page.tsx
+
+/components
+  /student-header.tsx (Navigation header)
+  /student-sidebar.tsx (Side navigation)
+  /homework-card.tsx
+  /attendance-calendar.tsx
+  /grade-chart.tsx
+  /notice-card.tsx
+  /class-schedule.tsx
+  /notification-item.tsx
+  /ui/* (shadcn components)
+```
+
+---
+
+## UI/UX REQUIREMENTS
+
+### Navigation
+- **Mobile**: Bottom tab bar with icons (Home, Homework, Notices, Profile)
+- **Desktop**: Sidebar with expanded labels
+- **Header**: Student name, class, notification bell icon
+
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
+- Touch-friendly buttons (min 44px height)
+- Swipe gestures for mobile navigation
+
+### Interactions
+- Loading states with skeleton screens
+- Success/error toast notifications
+- Smooth transitions and animations
+- Hover effects on cards and buttons
+- Pull-to-refresh on mobile
+
+### Accessibility
+- Semantic HTML elements
+- ARIA labels for screen readers
+- Keyboard navigation support
+- High contrast mode support
+- Text scaling support
+
+---
+
+## KEY FEATURES TO IMPLEMENT
+
+### 1. Dashboard Cards - Interactive & Clickable
+- Each stat card should navigate to respective page
+- Hover effects with scale transform
+- Loading skeleton while fetching data
+
+### 2. Homework Submission Flow
+- Multi-file upload with drag-and-drop
+- File type validation (images, PDFs, docs)
+- File size limit (10MB per file)
+- Preview before submit
+- Progress bar during upload
+- Success confirmation after submission
+
+### 3. Attendance Calendar
+- Interactive calendar with date selection
+- Color coding for different status types
+- Monthly navigation (previous/next month)
+- Today button to return to current month
+- Detailed view on date click
+
+### 4. Notice System
+- Real-time notice updates
+- Push notification integration (optional)
+- Mark as read functionality
+- Archive old notices
+- Search and filter capabilities
+
+### 5. Grade Visualization
+- Charts using Recharts library
+- Bar charts for subject-wise comparison
+- Line charts for progress over time
+- Pie chart for grade distribution
+- Export report card as PDF
+
+---
+
+## FORM VALIDATIONS
+
+### Homework Submission
+- At least one file OR text content required
+- File type validation
+- File size validation
+- Prevent duplicate submissions
+- Confirm before submit
+
+### Profile Update
+- Email format validation
+- Phone number validation (10 digits)
+- Password strength requirements
+- Image upload size limit (5MB)
+
+---
+
+## ERROR HANDLING
+
+### Common Errors
+- Network failure - Show retry option
+- File upload failure - Allow re-upload
+- Session timeout - Redirect to login
+- Data not found - Show empty state with message
+
+### Error Messages
+- User-friendly language
+- Clear action steps
+- Support contact information
+
+---
+
+## PERFORMANCE OPTIMIZATION
+
+- Lazy load images
+- Code splitting by route
+- Optimize bundle size
+- Cache static assets
+- Debounce search inputs
+- Pagination for long lists (homework, notices)
+
+---
+
+## SECURITY CONSIDERATIONS
+
+- Student can only view their own data
+- Secure file uploads (virus scanning if possible)
+- Input sanitization
+- XSS prevention
+- CSRF protection
+- Secure password storage (hashed)
+
+---
+
+## PARENT PORTAL (Additional Feature)
+
+### Parent Access
+- Separate login credentials
+- View all student information (read-only)
+- Receive notifications
+- Download reports
+- Contact teacher option
+- Fee payment
+
+---
+
+## TESTING REQUIREMENTS
+
+### Test Cases
+- Login/Logout flow
+- Homework submission end-to-end
+- File upload scenarios
+- Attendance calculation accuracy
+- Grade display correctness
+- Notice filtering and search
+- Responsive design on multiple devices
+
+---
+
+## SAMPLE DATA STRUCTURE
+
+### Student Object
+```typescript
+interface Student {
+  id: string;
+  name: string;
+  rollNumber: string;
+  class: string;
+  section: string;
+  email: string;
+  phone: string;
+  profilePicture?: string;
+  dateOfBirth: string;
+  bloodGroup: string;
+  address: string;
+  parentName: string;
+  parentPhone: string;
+  parentEmail: string;
+  admissionNumber: string;
+  academicYear: string;
+}
+```
+
+### Homework Submission Object
+```typescript
+interface HomeworkSubmission {
+  id: string;
+  homeworkId: string;
+  studentId: string;
+  submittedDate: string;
+  files: { name: string; url: string; type: string }[];
+  textContent?: string;
+  status: 'submitted' | 'late' | 'graded';
+  grade?: string;
+  teacherFeedback?: string;
+  marks?: number;
+}
+```
+
+### Attendance Record Object
+```typescript
+interface AttendanceRecord {
+  id: string;
+  studentId: string;
+  date: string;
+  subject: string;
+  status: 'present' | 'absent' | 'leave' | 'holiday';
+  markedBy: string;
+  remarks?: string;
+}
+```
+
+---
+
+## PRIORITY ORDER FOR DEVELOPMENT
+
+1. **Phase 1 - Core Features** (Week 1-2)
+   - Student Dashboard
+   - Authentication & Profile
+   - Basic Navigation
+
+2. **Phase 2 - Academic Features** (Week 3-4)
+   - Homework Page with submission
+   - Attendance Page with calendar
+   - Classes/Schedule Page
+
+3. **Phase 3 - Communication** (Week 5)
+   - Notices Page
+   - Notifications Center
+
+4. **Phase 4 - Performance Tracking** (Week 6)
+   - Grades Page with charts
+   - Progress tracking
+
+5. **Phase 5 - Additional Features** (Week 7+)
+   - Library (optional)
+   - Fee Payment (optional)
+   - Parent Portal
+
+---
+
+## DEPLOYMENT CHECKLIST
+
+- [ ] Environment variables configured
+- [ ] Database migrations completed
+- [ ] API endpoints secured
+- [ ] File upload storage configured
+- [ ] Error logging setup
+- [ ] Performance monitoring
+- [ ] Mobile responsive testing
+- [ ] Cross-browser testing
+- [ ] SSL certificate installed
+- [ ] Backup strategy implemented
+
+---
+
+## FINAL NOTES
+
+- Ensure all features match the teacher module functionality from student perspective
+- Maintain consistent design language across all pages
+- Focus on mobile usability as students will primarily use phones
+- Implement real-time updates where possible
+- Provide clear feedback for all user actions
+- Keep interface simple and intuitive
+- Use loading states to improve perceived performance
+- Implement offline support for viewing previously loaded data
+- Add empty states with helpful messages
+- Include onboarding tutorial for first-time users
+
+---
+
+## DESIGN INSPIRATION KEYWORDS
+
+- Modern student portal
+- Clean educational interface
+- Mobile-first academic app
+- Minimalist school dashboard
+- Friendly educational UI
+- Engaging learning platform
+- Youth-focused design
+- Intuitive homework submission
+- Interactive attendance tracking
+- Visual grade reporting
+
+---
+
+END OF PROMPT
